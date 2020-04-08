@@ -1,0 +1,7 @@
+# TensorRT
+## Project workflow
+1. Training models with Tensorflow (since support quantization for onnx) and darknet
+2. define utilities: batch reader, eval_tool
+3. model - onnx - tensorrt (add quantization at this step)
+4. engine load model (C++ or python API)
+5. input / output 
