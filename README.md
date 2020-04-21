@@ -65,12 +65,12 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
 
    I compared mAP of the TensorRT engine and the original tensorflow model for both 'ssd_mobilenet_v1_coco' and 'ssd_mobilenet_v2_coco' using COCO 'val2017' data.  The results were good.  In both cases, mAP of the optimized TensorRT engine matched the original tensorflow model.  The FPS (frames per second) numbers in the table were measured using 'trt_ssd_async.py' on my Jetson Nano DevKit with JetPack-4.3.
 
-   | TensorRT engine         | mAP @<br>IoU=0.5:0.95 |  mAP @<br>IoU=0.5  | FPS on Nano |
+   | TensorRT engine         | mAP @<br>IoU=0.5:0.95 |  mAP @<br>IoU=0.5  |    FPS      |
    |:------------------------|:---------------------:|:------------------:|:-----------:|
    | mobilenet_v1 TF         |          0.232        |        0.351       |      --     |
-   | mobilenet_v1 TRT (FP16) |          0.232        |        0.351       |     27.7    |
+   | mobilenet_v1 TRT (FP16) |          0.232        |        0.351       |     65.2    |
    | mobilenet_v2 TF         |          0.248        |        0.375       |      --     |
-   | mobilenet_v2 TRT (FP16) |          0.248        |        0.375       |     22.7    |
+   | mobilenet_v2 TRT (FP16) |          0.248        |        0.375       |     61.4    |
 
 6. Check out my blog posts for implementation details:
 
