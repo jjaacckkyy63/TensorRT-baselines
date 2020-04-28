@@ -8,6 +8,7 @@ import os
 import sys
 import json
 import argparse
+import time
 
 import cv2
 import pycuda.autoinit  # This is needed for initializing CUDA driver
@@ -51,6 +52,7 @@ def check_args(args):
 def generate_results(yolov3, imgs_dir, jpgs, results_file):
     """Run detection on each jpg and write results to file."""
     results = []
+    start = time.time()
     for jpg in tqdm(jpgs):
         img = cv2.imread(os.path.join(imgs_dir, jpg))
         image_id = int(jpg.split('.')[0].split('_')[-1])
@@ -65,6 +67,9 @@ def generate_results(yolov3, imgs_dir, jpgs, results_file):
                             'category_id': int(cls),
                             'bbox': [x, y, w, h],
                             'score': float(conf)})
+    end = time.time()
+    fps = len(jpgs) / (end-start)
+    print("FPS:", fps)
     with open(results_file, 'w') as f:
         f.write(json.dumps(results, indent=4))
 
@@ -77,12 +82,22 @@ def main():
     yolo_dim = int(args.model.split('-')[-1])  # 416 or 608
     trt_yolov3 = TrtYOLOv3(args.model, (yolo_dim, yolo_dim))
 
-    jpgs = [j for j in os.listdir(args.imgs_dir) if j.endswith('.jpg')]
+    cocoGt = COCO(args.annotations)
+    
+    catIds = cocoGt.getCatIds(catNms=['stop sign'])
+    imgIds_cat = cocoGt.getImgIds(catIds=catIds)
+
+    # test = cocoGt.loadImgs(433892)
+    # print(test)
+    # print(imgIds_cat)
+    jpgs = [cocoGt.loadImgs(ids)[0]['file_name'] for ids in imgIds_cat]
+
+    # jpgs = [j for j in os.listdir(args.imgs_dir) if j.endswith('.jpg')]
     generate_results(trt_yolov3, args.imgs_dir, jpgs, results_file)
 
     # Run COCO mAP evaluation
     # Reference: https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoEvalDemo.ipynb
-    cocoGt = COCO(args.annotations)
+    
     cocoDt = cocoGt.loadRes(results_file)
     imgIds = sorted(cocoGt.getImgIds())
     cocoEval = COCOeval(cocoGt, cocoDt, 'bbox')

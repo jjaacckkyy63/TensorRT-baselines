@@ -467,6 +467,8 @@ class TrtYOLOv3(object):
             outputs=self.outputs,
             stream=self.stream)
 
+        print(trt_outputs[0].shape)
+
         # Before doing post-processing, we need to reshape the outputs
         # as do_inference() will give us flat arrays.
         trt_outputs = [output.reshape(shape) for output, shape
