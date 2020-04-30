@@ -50,8 +50,6 @@ SSD
 
 5. To verify accuracy (mAP) of the optimized TensorRT engines and make sure they do not degrade too much (due to reduced floating-point precision of 'FP16') from the original TensorFlow frozen inference graphs, you could prepare validation data and run 'eval_ssd.py'.  Refer to [README_eval_ssd.md](README_eval_ssd.md) for details.
 
-   I compared mAP of the TensorRT engine and the original tensorflow model for both 'ssd_mobilenet_v1_coco' and 'ssd_mobilenet_v2_coco' using COCO 'val2017' data.  The results were good.  In both cases, mAP of the optimized TensorRT engine matched the original tensorflow model.  The FPS (frames per second) numbers in the table were measured using 'trt_ssd_async.py' on my Jetson Nano DevKit with JetPack-4.3.
-
    | TensorRT engine         | mAP @<br>IoU=0.5:0.95 |  mAP @<br>IoU=0.5  |    FPS      |
    |:------------------------|:---------------------:|:------------------:|:-----------:|
    | mobilenet_v1 TF         |          0.232        |        0.351       |      --     |
@@ -118,14 +116,14 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
 
    I evaluated all of yolov3-tiny-288, yolov3-tiny-416, yolov3-288, yolov3-416 and yolov3-608 TensorRT engines with COCO 'val2017' data and got the following results.  The FPS (frames per second) numbers were measured using 'trt_yolov3.py' on my Jetson Nano DevKit with JetPack-4.3.
 
-   | TensorRT engine        | mAP @<br>IoU=0.5:0.95 |  mAP @<br>IoU=0.5  | FPS on Nano |
-   |:-----------------------|:---------------------:|:------------------:|:-----------:|
-   | yolov3-tiny-288 (FP16) |          0.077        |        0.158       |     20.9    |
-   | yolov3-tiny-416 (FP16) |          0.096        |        0.202       |     14.2    |
-   | yolov3-288 (FP16)      |          0.331        |        0.600       |     5.42    |
-   | yolov3-416 (FP16)      |          0.373        |        0.664       |     3.07    |
-   | yolov3-608 (FP16)      |          0.376        |        0.665       |     1.53    |
-   | yolov3-608 (FP32)      |          0.376        |        0.665       |      --     |
+   | TensorRT engine        | mAP @<br>IoU=0.5:0.95 |  mAP @<br>IoU=0.5  | 
+   |:-----------------------|:---------------------:|:------------------:|
+   | yolov3-tiny-288 (FP16) |          0.077        |        0.158       |
+   | yolov3-tiny-416 (FP16) |          0.096        |        0.202       |
+   | yolov3-288 (FP16)      |          0.331        |        0.600       |
+   | yolov3-416 (FP16)      |          0.373        |        0.664       |
+   | yolov3-608 (FP16)      |          0.376        |        0.665       |
+   | yolov3-608 (FP32)      |          0.376        |        0.665       |
 
 
 Licenses
