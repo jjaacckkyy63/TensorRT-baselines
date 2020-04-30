@@ -72,12 +72,6 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
    | mobilenet_v2 TF         |          0.248        |        0.375       |      --     |
    | mobilenet_v2 TRT (FP16) |          0.248        |        0.375       |     61.4    |
 
-6. Check out my blog posts for implementation details:
-
-   * [TensorRT UFF SSD](https://jkjung-avt.github.io/tensorrt-ssd/)
-   * [Speeding Up TensorRT UFF SSD](https://jkjung-avt.github.io/speed-up-trt-ssd/)
-   * [Verifying mAP of TensorRT Optimized SSD and YOLOv3 Models](https://jkjung-avt.github.io/trt-detection-map/)
-   * Or if you'd like to learn how to train your own custom object detectors which could be easily converted to TensorRT engines and inferenced with 'trt_ssd.py' and 'trt_ssd_async.py': [Training a Hand Detector with TensorFlow Object Detection API](https://jkjung-avt.github.io/hand-detection-tutorial/)
 
 <a name="YOLOv3"></a>
 YOLOv3
@@ -146,10 +140,6 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
    | yolov3-608 (FP16)      |          0.376        |        0.665       |     1.53    |
    | yolov3-608 (FP32)      |          0.376        |        0.665       |      --     |
 
-7. Check out my blog post for implementation details:
-
-   * [TensorRT ONNX YOLOv3](https://jkjung-avt.github.io/tensorrt-yolov3/)
-   * [Verifying mAP of TensorRT Optimized SSD and YOLOv3 Models](https://jkjung-avt.github.io/trt-detection-map/)
 
 Licenses
 --------
