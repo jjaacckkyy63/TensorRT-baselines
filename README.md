@@ -3,12 +3,6 @@
 SSD
 ------------
 
-This demo shows how to convert trained tensorflow Single-Shot Multibox Detector (SSD) models through UFF to TensorRT engines, and to do real-time object detection with the optimized TensorRT engines.
-
-NOTE: This particular demo requires TensorRT 'Python API', which is only available in TensorRT 5.x+ on the Jetson systems.  In other words, this demo only works on Jetson systems properly set up with JetPack-4.2+, but **not** JetPack-3.x or earlier versions.
-
-Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', follow these steps:
-
 1. Install requirements (pycuda, etc.) and build TensorRT engines from the trained SSD models.
 
    ```shell
@@ -16,8 +10,6 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
    $ ./install.sh
    $ ./build_engines.sh
    ```
-
-   NOTE: On my Jetson Nano DevKit with TensorRT 5.1.6, the version number of UFF converter was "0.6.3".  When I ran 'build_engine.py', the UFF library actually printed out: `UFF has been tested with tensorflow 1.12.0. Other versions are not guaranteed to work.`  So I would strongly suggest you to use **tensorflow 1.12.x** (or whatever matching version for the UFF library installed on your system) when converting pb to uff.
 
 2. Run the 'trt_ssd.py' demo program.  The demo supports 4 models: 'ssd_mobilenet_v1_coco', 'ssd_mobilenet_v1_egohands', 'ssd_mobilenet_v2_coco', or 'ssd_mobilenet_v2_egohands'.  For example, I tested the 'ssd_mobilenet_v1_coco' model with the 'huskies' picture.
 
@@ -32,11 +24,6 @@ Assuming this repository has been cloned at '${HOME}/project/tensorrt_demos', fo
 
    ![Huskies detected](https://raw.githubusercontent.com/jkjung-avt/tensorrt_demos/master/doc/huskies.png)
 
-   NOTE: When running this demo with TensorRT 6 (JetPack-4.3) on the Jetson Nano, I encountered the following error message which could probably be ignored for now.  Quote from [NVIDIA's NVES_R](https://devtalk.nvidia.com/default/topic/1065233/tensorrt/-tensorrt-error-could-not-register-plugin-creator-flattenconcat_trt-in-namespace-/post/5394191/#5394191): `This is a known issue and will be fixed in a future version.`
-
-   ```
-   [TensorRT] ERROR: Could not register plugin creator: FlattenConcat_TRT in namespace
-   ```
 
    I also tested the 'ssd_mobilenet_v1_egohands' (hand detector) model with a video clip from YouTube, and got the following result.  Again, frame rate was pretty good.  But the detection didn't seem very accurate though :-(
 
