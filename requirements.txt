@@ -21,7 +21,7 @@ packaging==20.3
 Pillow==7.1.1
 pluggy==0.13.1
 progressbar==2.5
-protobuf==3.11.3
+protobuf==3.18.3
 py==1.8.1
 pycocotools==2.0.0
 pycuda==2019.1.2
